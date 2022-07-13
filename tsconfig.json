@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "./"
+  }
+}

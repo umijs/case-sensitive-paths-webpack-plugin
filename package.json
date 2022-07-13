@@ -1,0 +1,34 @@
+{
+  "name": "@umijs/case-sensitive-paths-webpack-plugin",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [],
+  "authors": [
+    "PeachScript <scdzwyxst@gmail.com>"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "father": "^4.0.0-alpha.3"
+  },
+  "packageManager": "pnpm@7.3.0",
+  "prettier": {
+    "pluginSearchDirs": false,
+    "printWidth": 80,
+    "proseWrap": "never",
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
