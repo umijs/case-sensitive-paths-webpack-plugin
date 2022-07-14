@@ -19,7 +19,7 @@ class CaseSensitivePathsPlugin {
       // skip resources which outside project
       res.startsWith(this.context) &&
       // skip node_modules
-      !res.includes('/node_modules/') &&
+      !/(\/|\\)node_modules\1/.test(res) &&
       // skip duplicated css resource by unknown reason
       res !== issuer
     );

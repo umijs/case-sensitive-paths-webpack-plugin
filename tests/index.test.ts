@@ -46,13 +46,13 @@ test('should check css modules', () => {
 
 test('should check sub-level modules', () => {
   expect(
-    jsonStats.errors!.find((err) => err.message.includes('Child/index.js`')),
+    jsonStats.errors!.find((err) => /Child(\/|\\)index.js/.test(err.message)),
   ).not.toBeUndefined();
   expect(
-    jsonStats.errors!.find((err) => err.message.includes('Child/Son/A.js`')),
+    jsonStats.errors!.find((err) => /Son(\/|\\)A.js/.test(err.message)),
   ).not.toBeUndefined();
   expect(
-    jsonStats.errors!.find((err) => err.message.includes('Child/Son/B.js`')),
+    jsonStats.errors!.find((err) => /Son(\/|\\)B.js/.test(err.message)),
   ).not.toBeUndefined();
 });
 
