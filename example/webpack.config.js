@@ -1,4 +1,4 @@
-const Plugin = require('../dist').default;
+const Plugin = require('../dist');
 
 module.exports = {
   mode: 'production',

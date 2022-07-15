@@ -139,4 +139,4 @@ class CaseSensitivePathsPlugin {
   }
 }
 
-export default CaseSensitivePathsPlugin;
+export = CaseSensitivePathsPlugin;
