@@ -5,21 +5,45 @@
 [![codecov](https://codecov.io/gh/umijs/case-sensitive-paths-webpack-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/umijs/case-sensitive-paths-webpack-plugin)
 [![GitHub Actions status](https://github.com/umijs/case-sensitive-paths-webpack-plugin/workflows/CI/badge.svg)](https://github.com/umijs/case-sensitive-paths-webpack-plugin)
 
-## Install
+A webpack plugin to enforce case-sensitive paths when resolving module, similar to the well-known [case-sensitive-paths-webpack-plugin](https://github.com/Urthen/case-sensitive-paths-webpack-plugin) project.
+
+The difference is:
+
+1. Only compatible with Webpack 4+ & Node.js 14+
+3. Ignore paths outside of current project
+2. Ignore `node_modules` resources
+4. Ignore `asset/inline` resources
+5. Check each level paths asynchronously & in parallel
+6. Higher cache utilization
+
+So this plugin has better performance than it.
+
+## Usage
+
+Install:
 
 ```bash
-$ pnpm install
+$ npm i @umijs/case-sensitive-paths-webpack-plugin --save-dev
 ```
 
-```bash
-$ npm run dev
-$ npm run build
+Configure in `webpack.config.js`:
+
+```js
+const CaseSensitivePathsPlugin = require('@umijs/case-sensitive-paths-webpack-plugin');
+
+module.exports = {
+  plugins: [
+    new CaseSensitivePathsPlugin(),
+  ],
+};
 ```
 
-## Options
+That's all.
 
-TODO
+## Thanks
+
+This project is inspired by [case-sensitive-paths-webpack-plugin](https://github.com/Urthen/case-sensitive-paths-webpack-plugin), thanks!
 
 ## LICENSE
 
-MIT
+[MIT](./LICENSE)
