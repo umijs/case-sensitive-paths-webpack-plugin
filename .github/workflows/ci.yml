@@ -73,7 +73,7 @@ jobs:
         if: matrix.node_version != '18.x' || matrix.os != 'macos-latest'
         run: |
           pnpm rm webpack
-          pnpm i webpack@5
+          pnpm i webpack@4
           pnpm test
         env:
           CI: true
