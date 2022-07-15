@@ -1,6 +1,6 @@
 {
   "name": "@umijs/case-sensitive-paths-webpack-plugin",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A webpack plugin to enforce case-sensitive paths when resolving module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
