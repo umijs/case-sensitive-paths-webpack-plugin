@@ -35,7 +35,7 @@ class CaseSensitivePathsPlugin {
       const deferrers: Promise<string[]>[] = [];
 
       // check every level directories for resource, except outside project
-      while (full.length >= this.context.length) {
+      while (full.length > this.context.length) {
         const { dir, base: current } = path.parse(full);
         let deferrer: typeof deferrers['0'];
 
@@ -60,7 +60,7 @@ class CaseSensitivePathsPlugin {
         }
 
         // check current file synchronously, for performance
-        deferrer.then(files => {
+        deferrer.then((files) => {
           // try to find correct name
           // if current file not exists in current directory and there has no existing error
           if (!files.includes(current) && !caseError) {
@@ -108,7 +108,8 @@ class CaseSensitivePathsPlugin {
 
     compiler.hooks.normalModuleFactory.tap(PLUGIN_NAME, (factory) => {
       factory.hooks.afterResolve.tapAsync(PLUGIN_NAME, (data, done) => {
-        const { createData } = data;
+        // compatible with webpack 4.x
+        const { createData = data as typeof data.createData } = data;
 
         if (
           createData.resource &&

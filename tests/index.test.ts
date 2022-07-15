@@ -1,9 +1,20 @@
 import path from 'path';
-import { type Stats, type StatsCompilation, webpack } from 'webpack';
+import webpack, {
+  type StatsError,
+  type Stats,
+  type StatsCompilation,
+} from 'webpack';
 import Plugin from '../src';
 
 let stats: Stats;
 let jsonStats: StatsCompilation;
+
+/**
+ * get error message both for webpack 4.x & 5.x
+ */
+function getErrMsg(err: StatsError) {
+  return err.message || (err as unknown as string);
+}
 
 beforeAll(async () => {
   const config = require('../example/webpack.config');
@@ -27,37 +38,39 @@ test('should has errors', () => {
   expect(jsonStats.errors).toHaveLength(6);
   expect(
     jsonStats.errors!.every((err) =>
-      err.message.includes('CaseSensitivePathsPlugin'),
+      getErrMsg(err).includes('CaseSensitivePathsPlugin'),
     ),
   ).toBeTruthy();
 });
 
 test('should check same-level modules', () => {
   expect(
-    jsonStats.errors!.find((err) => err.message.includes('`other.js`')),
+    jsonStats.errors!.find((err) => getErrMsg(err).includes('`other.js`')),
   ).not.toBeUndefined();
 });
 
 test('should check css modules', () => {
   expect(
-    jsonStats.errors!.find((err) => err.message.includes('`other.css`')),
+    jsonStats.errors!.find((err) => getErrMsg(err).includes('`other.css`')),
   ).not.toBeUndefined();
 });
 
 test('should check sub-level modules', () => {
   expect(
-    jsonStats.errors!.find((err) => /Child(\/|\\)index.js/.test(err.message)),
+    jsonStats.errors!.find((err) =>
+      /Child(\/|\\)index.js/.test(getErrMsg(err)),
+    ),
   ).not.toBeUndefined();
   expect(
-    jsonStats.errors!.find((err) => /Son(\/|\\)A.js/.test(err.message)),
+    jsonStats.errors!.find((err) => /Son(\/|\\)A.js/.test(getErrMsg(err))),
   ).not.toBeUndefined();
   expect(
-    jsonStats.errors!.find((err) => /Son(\/|\\)B.js/.test(err.message)),
+    jsonStats.errors!.find((err) => /Son(\/|\\)B.js/.test(getErrMsg(err))),
   ).not.toBeUndefined();
 });
 
 test('should check paths with # correctly', () => {
   expect(
-    jsonStats.errors!.find((err) => err.message.includes('`hash.js`')),
+    jsonStats.errors!.find((err) => getErrMsg(err).includes('`hash.js`')),
   ).not.toBeUndefined();
 });
